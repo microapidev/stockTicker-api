@@ -1,2 +1,2 @@
 # stockTicker-api
-An api to monitor the stock market, and reflect current market prices. 
+A microservice to monitor the stock market, and reflect current market prices. 
