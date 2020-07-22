@@ -37,7 +37,7 @@ You will first need to setup your local environment and ensure that all configur
 1. Run `npm run lint:fix` to fix all fixable errors in source code and format with prettier
 2. Run `npm run lint` to find errors that still remain in your code syntax/format
 3. Ensure you fix any remaining linting errors displayed.
-4. Run npm run test:ci to ensure your code matches the test
+4. Run npm run `test:ci` to ensure your code matches the test
 
 ## Testing Your Code
 
