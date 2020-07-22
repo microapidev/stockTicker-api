@@ -4,15 +4,15 @@
   "description": "A microservice to monitor the stock market, and reflect current market prices.",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env DEBUG=log node ./server/bin/www.js",
-    "dev": "cross-env NODE_ENV=development DEBUG=log nodemon --exec babel-node ./server/bin/www.js",
+    "start": "cross-env DEBUG=log node ./src/bin/www.js",
+    "dev": "cross-env NODE_ENV=development DEBUG=log nodemon --exec babel-node ./src/bin/www.js",
     "test": "cross-env NODE_ENV=test jest --verbose",
     "test:debug": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --verbose",
     "test:watch": "cross-env NODE_ENV=test jest --watch --verbose",
     "test:cover": "cross-env NODE_ENV=test jest --coverage",
     "test:ci": "cross-env NODE_ENV=test jest --coverage --verbose && cat ./coverage/lcov.info | coveralls",
-    "lint": "eslint \"./**/*.js\"",
-    "lint:fix": "eslint --fix \"server/**/*.js\""
+    "lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint --fix \"src/**/*.js\""
   },
   "repository": {
     "type": "git",

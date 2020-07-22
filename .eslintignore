@@ -2,6 +2,3 @@ node_modules
 build
 docker
 .vscode
-jest.config.js
-babel.config.js
-.eslintrc.js
