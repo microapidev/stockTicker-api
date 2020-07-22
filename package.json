@@ -10,7 +10,7 @@
     "test:debug": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --verbose",
     "test:watch": "cross-env NODE_ENV=test jest --watch --verbose",
     "test:cover": "cross-env NODE_ENV=test jest --coverage",
-    "test:ci": "cross-env NODE_ENV=test jest --coverage --verbose && cat ./coverage/lcov.info | coveralls",
+    "test:ci": "cross-env NODE_ENV=test jest --coverage --verbose",
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint --fix \"./**/*.js\""
   },
@@ -28,6 +28,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "cookie-parser": "~1.4.4",
+    "cross-env": "^7.0.2",
     "debug": "^2.6.9",
     "express": "~4.16.1",
     "express-rate-limit": "^5.1.3",
