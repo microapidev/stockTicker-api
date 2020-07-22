@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const log = require('debug')('log');
-const http = require('http');
+import app from '../app';
+import http from 'http';
+import debug from 'debug';
+
+const log = debug('log');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -15,15 +17,11 @@ const http = require('http');
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+  // named pipe
+  if (isNaN(port)) return val;
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+  // port number
+  if (port >= 0) return port;
 
   return false;
 };
@@ -46,9 +44,7 @@ const server = http.createServer(app);
  */
 
 const onError = (error) => {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+  if (error.syscall !== 'listen') throw error;
 
   const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 

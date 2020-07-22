@@ -1,8 +1,8 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
 
-const indexRouter = require('./routes/index');
+import indexRouter from './routes/index';
 
 const app = express();
 
@@ -29,4 +29,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).end();
 });
 
-module.exports = app;
+export default app;
