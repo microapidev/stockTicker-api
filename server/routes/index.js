@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
+let express = require("express");
+let router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+// eslint-disable-next-line no-unused-vars
+router.get("/", (req, res, next) => {
   res.status(200).send("Connected to server");
 });
 

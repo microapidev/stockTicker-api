@@ -4,5 +4,5 @@ module.exports = {
   coverageDirectory: './coverage',
   testEnvironment: 'node',
   // setupFilesAfterEnv: ['./__tests__/config/setup.js']
-  coveragePathIgnorePatterns: ['/node_modules/']
+  coveragePathIgnorePatterns: ['/node_modules/'],
 };
