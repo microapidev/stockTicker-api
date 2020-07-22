@@ -10,21 +10,11 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-    indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
-    'no-console': [
-      'warn',
-      { allow: ['clear', 'info', 'error', 'dir', 'trace', 'log'] },
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
     ],
-    curly: 'error',
-    'no-else-return': 'error',
-    'no-unneeded-ternary': 'error',
-    'no-useless-return': 'error',
-    'no-var': 'error',
-    'one-var': ['error', 'never'],
-    'prefer-arrow-callback': 'error',
-    yoda: ['error', 'never', { exceptRange: true }],
   },
 };
