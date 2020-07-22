@@ -1,8 +1,7 @@
 node_modules
 build
-docs
 docker
-test
 .vscode
-koa/views
-src/generated
+jest.config.js
+babel.config.js
+.eslintrc.js

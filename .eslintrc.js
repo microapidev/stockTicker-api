@@ -2,19 +2,19 @@ module.exports = {
   env: {
     es2020: true,
     node: true,
-    jest: true,
+    jest: true
   },
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaVersion: 11,
-    sourceType: "module",
+    sourceType: 'module'
   },
   rules: {
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
-        endOfLine: "auto",
-      },
-    ],
-  },
+        endOfLine: 'auto'
+      }
+    ]
+  }
 };
