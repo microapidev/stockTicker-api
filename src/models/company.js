@@ -28,4 +28,4 @@ CompanySchema.index(
 );
 
 const Company = mongoose.model('Company', CompanySchema);
-export default Company;
+export { Company };

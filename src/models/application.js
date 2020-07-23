@@ -35,4 +35,4 @@ ApplicationSchema.plugin(mongooseDelete, {
 });
 
 const Application = mongoose.model('Applications', ApplicationSchema);
-export default Application;
+export { Application };

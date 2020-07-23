@@ -1,24 +1,29 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import debug from 'debug';
+import { DB_URI as connectionUri } from './util';
 
-const { connectionUri } = require('./utils/dbParams');
+const log = debug('log');
 
 const connect = async () => {
-  if (mongoose.connection.readyState === 0) {
-    try {
+  try {
+    if (mongoose.connection.readyState === 0) {
+      log('Database connecting...');
       await mongoose.connect(connectionUri, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
         useUnifiedTopology: true
       });
-    } catch (err) {
-      console.error('App starting error:', err.stack);
-      process.exit(1);
+
+      log('Connected!');
     }
+  } catch (error) {
+    log(error);
+    process.exit(1);
   }
 };
 
-const truncate = async () => {
+const format = async () => {
   if (mongoose.connection.readyState !== 0) {
     const { collections } = mongoose.connection;
 
@@ -36,8 +41,4 @@ const disconnect = async () => {
   }
 };
 
-module.exports = {
-  connect,
-  truncate,
-  disconnect
-};
+export { connect, format, disconnect };

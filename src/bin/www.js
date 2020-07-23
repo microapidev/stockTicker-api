@@ -1,14 +1,14 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
 import app from '../app';
 import http from 'http';
 import debug from 'debug';
+import { connect } from '../config/mongodb';
 
 const log = debug('log');
+
+/**
+ * Connect to database
+ */
+connect();
 
 /**
  * Normalize a port into a number, string, or false.
@@ -70,7 +70,7 @@ const onError = (error) => {
 const onListening = () => {
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-  log('Listening on ' + bind);
+  log('Server listening on ' + bind);
 };
 
 /**

@@ -44,4 +44,4 @@ AdminSchema.plugin(mongooseDelete, {
 });
 
 const Admin = mongoose.model('Admins', AdminSchema);
-export default Admin;
+export { Admin };
