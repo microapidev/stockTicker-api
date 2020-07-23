@@ -1,6 +1,6 @@
 # Stock-Ticker Microservice
 
-[![Build Status](https://travis-ci.com/microapidev/stockTicker-api.svg?branch=develop)](https://travis-ci.org/microapidev/stockTicker-api) [![Coverage Status](https://coveralls.io/repos/github/microapidev/stockTicker-api/badge.svg?branch=develop)](https://coveralls.io/github/microapidev/stockTicker-api?branch=develop) ![Issues](https://img.shields.io/github/issues/microapidev/stockTicker-api) ![Forks](https://img.shields.io/github/forks/microapidev/stockTicker-api) ![MIT License](https://img.shields.io/github/license/microapidev/stockTicker-api)
+[![Build Status](https://travis-ci.com/microapidev/stockTicker-api.svg?branch=develop)](https://travis-ci.org/microapidev/stockTicker-api) [![Coverage Status](https://coveralls.io/repos/github/microapidev/stockTicker-api/badge.svg?branch=develop)](https://coveralls.io/github/microapidev/stockTicker-api?branch=develop) ![Forks](https://img.shields.io/github/forks/microapidev/stockTicker-api) ![MIT License](https://img.shields.io/github/license/microapidev/stockTicker-api)
 
 A microservice to monitor the stock market, and reflect current market prices. 
 
