@@ -5,27 +5,7 @@ import { connect } from '../config/mongodb';
 const WebSocket = require('ws');
 
 const log = debug('log');
-
-/**
- * Connect to database
- */
-connect();
-
-/**
- * Normalize a port into a number, string, or false.
- */
-const wss = new WebSocket.Server({ server });
-const normalizePort = (val) => {
-  const port = parseInt(val, 10);
-
-  // named pipe
-  if (isNaN(port)) return val;
-
-  // port number
-  if (port >= 0) return port;
-
-  return false;
-};
+const wss = new WebSocket.Server({ noServer: true});
 module.exports = {
  socket : wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(data) {
@@ -38,6 +18,26 @@ module.exports = {
       });
     });
   })
+};
+
+/**
+ * Connect to database
+ */
+connect();
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+const normalizePort = (val) => {
+  const port = parseInt(val, 10);
+
+  // named pipe
+  if (isNaN(port)) return val;
+
+  // port number
+  if (port >= 0) return port;
+
+  return false;
 };
 /**
  * Get port from environment and store in Express.
