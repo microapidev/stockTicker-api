@@ -1,15 +1,11 @@
 import Joi from '@hapi/joi';
-import mongoIdSchema from '../mongoIdSchema';
+import { mongoIdSchema } from './mongoIdSchema';
 
 /**
  * Schema validation for '/admin routes'
  */
 
 export const addSingleAdmin = {
-  headers: Joi.object({
-    authorization: Joi.string().required()
-  }),
-
   body: Joi.object().keys({
     email: Joi.string()
       .email({

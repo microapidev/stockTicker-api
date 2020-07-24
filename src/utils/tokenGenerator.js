@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import mongoIdSchema from './validationTools/mongoIdSchema';
+import mongoose from 'mongoose';
 import CustomError from './customError';
 import { ADMIN_SECRET } from '../config/util';
 
@@ -16,7 +16,7 @@ const generateToken = (payload, secret, duration = '30d') => {
 
 // adminToken generator
 const getAdminToken = (adminId) => {
-  if (!mongoIdSchema.isValidObjectId(adminId)) {
+  if (!mongoose.Types.ObjectId(adminId)) {
     throw new CustomError(400, 'Invalid admin ID');
   }
 

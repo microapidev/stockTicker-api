@@ -5,6 +5,7 @@ import logger from 'morgan';
 import { errorHandler } from './middlewares/errorHandler';
 import CustomError from './utils/customError';
 import indexRouter from './routes/index';
+import apiRouter from './routes/api/index';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
+app.use(apiRouter);
 
 // catch 404, non-existent route
 app.use('*', (request, response, next) => {

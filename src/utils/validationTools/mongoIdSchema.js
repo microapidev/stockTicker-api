@@ -4,7 +4,7 @@ const {
   Types: { ObjectId }
 } = mongoose;
 
-const mongoIdSchema = {
+export const mongoIdSchema = {
   //Helper to check if an ID is an object ID
   isObjectId: (id, helper) => {
     if (id instanceof ObjectId) return true;
@@ -20,5 +20,3 @@ const mongoIdSchema = {
     return helper.message('Id is not valid');
   }
 };
-
-export { mongoIdSchema };
