@@ -8,11 +8,6 @@ const CompanySchema = new Schema(
       type: String,
       unique: true,
       required: true
-    },
-    createdBy: {
-      type: Schema.Types.ObjectId,
-      ref: 'Admin',
-      required: true
     }
   },
   { timestamps: true }

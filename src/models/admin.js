@@ -5,28 +5,30 @@ const Schema = mongoose.Schema;
 
 const AdminSchema = new Schema(
   {
-    fullname: {
-      type: String,
-      required: true
-    },
     email: {
       type: String,
       lowercase: true,
       required: true,
       unique: true
     },
-    password: {
-      type: String,
-      required: true
-    },
-    applications: {
-      type: Schema.Types.ObjectId,
-      ref: 'Application',
-      required: true
-    }
+    applications: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Application'
+      }
+    ]
   },
   { timestamps: true }
 );
+
+AdminSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (document, returnedObject) => {
+    delete returnedObject._id;
+    delete returnedObject.passwordHash;
+  }
+});
 
 AdminSchema.index(
   {

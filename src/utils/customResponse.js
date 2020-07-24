@@ -1,5 +1,5 @@
-module.exports = (res, status, data, message) => {
-  res.status(status).json({
+export default (response, status, data, message) => {
+  response.status(status).json({
     data,
     status: 'success',
     message
