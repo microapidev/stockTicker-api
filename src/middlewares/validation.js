@@ -1,4 +1,4 @@
-const CustomError = require('../utils/customError');
+import CustomError from '../utils/customError';
 
 const schemaKeys = ['headers', 'params', 'query', 'body'];
 

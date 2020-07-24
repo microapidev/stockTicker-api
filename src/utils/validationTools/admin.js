@@ -18,10 +18,6 @@ export const addSingleAdmin = {
 };
 
 export const getSingleAdmin = {
-  headers: Joi.object({
-    authorization: Joi.string().required()
-  }),
-
   params: Joi.object().keys({
     adminId: Joi.custom(mongoIdSchema.isValidObjectId, 'mongo ObjectId').required()
   })

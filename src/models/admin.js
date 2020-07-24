@@ -21,6 +21,15 @@ const AdminSchema = new Schema(
   { timestamps: true }
 );
 
+AdminSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (document, returnedObject) => {
+    delete returnedObject._id;
+    delete returnedObject.passwordHash;
+  }
+});
+
 AdminSchema.index(
   {
     email: 1
