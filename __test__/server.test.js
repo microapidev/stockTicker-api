@@ -1,6 +1,5 @@
 import app from '../src/app';
 const request = require('supertest');
-const WebSocket = require('ws');
 import { PORT } from '../src/config/util';
 
 describe('Dummy Test', () => {
