@@ -2,6 +2,7 @@ import app from '../app';
 import http from 'http';
 import debug from 'debug';
 import { connect } from '../config/mongodb';
+const WebSocket = require('ws');
 
 const log = debug('log');
 
@@ -13,7 +14,7 @@ connect();
 /**
  * Normalize a port into a number, string, or false.
  */
-
+const wss = new WebSocket.Server({ server });
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
@@ -25,7 +26,19 @@ const normalizePort = (val) => {
 
   return false;
 };
-
+module.exports = {
+ socket : wss.on('connection', function connection(ws) {
+    ws.on('message', function incoming(data) {
+      wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(data);
+          console.log('User Socket Connected');
+          ws.on("disconnect", () => console.log(`${ws.id} User disconnected.`)); 
+        }
+      });
+    });
+  })
+};
 /**
  * Get port from environment and store in Express.
  */
