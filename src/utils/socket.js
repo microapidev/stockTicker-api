@@ -1,1 +1,1 @@
-let websocket = require('../bin/www'); 
+let socket = require('../bin/www'); 
