@@ -1,6 +1,8 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import { errorHandler } from './middlewares/errorHandler';
+import CustomError from './utils/customError';
 import indexRouter from './routes/index';
 
 const app = express();
@@ -12,20 +14,16 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  // eslint-disable-next-line no-undef
-  next(createError(404));
+// catch 404, non-existent route
+app.use('*', (request, response, next) => {
+  const error = new CustomError(404, `Oops. The route ${request.method} ${request.originalUrl} is not recognised`);
+  next(error);
 });
 
 // error handler
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  res.status(err.status || 500).end();
+app.use((error, request, response, next) => {
+  errorHandler(error, request, response);
 });
 
 export default app;
