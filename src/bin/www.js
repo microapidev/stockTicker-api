@@ -5,15 +5,15 @@ import { connect } from '../config/mongodb';
 const WebSocket = require('ws');
 
 const log = debug('log');
-const wss = new WebSocket.Server({ noServer: true});
+const wss = new WebSocket.Server({ noServer: true });
 module.exports = {
- socket : wss.on('connection', function connection(ws) {
+  socket: wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(data) {
       wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
           client.send(data);
           console.log('User Socket Connected');
-          ws.on("disconnect", () => console.log(`${ws.id} User disconnected.`)); 
+          ws.on('disconnect', () => console.log(`${ws.id} User disconnected.`));
         }
       });
     });

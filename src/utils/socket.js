@@ -1,53 +1,56 @@
-let socket = require('../bin/www'); 
-const companyInfo = require('../services/companyInfo')
-const financialInfo = require('../services/financialInfo')
+const socket = require('../bin/www');
+const companyInfo = require('../services/companyInfo');
+const financialInfo = require('../services/financialInfo');
+const WebSocket = require('ws');
 
-companyInfo.connect(`ws://localhost:${port}`, function (error0, connection) {
-    if (error0) {
-        throw error0;
+const ws = new WebSocket('wss://ws.finnhub.io?token=bscqdufrh5rcu5phfvm0');
+
+const company = companyInfo.connect(ws, function (error0, connection) {
+  if (error0) {
+    throw error0;
+  }
+  connection.createChannel(function (error1, channel) {
+    if (error1) {
+      throw error1;
     }
-    connection.createChannel(function (error1, channel) {
-        if (error1) {
-            throw error1;
-        }
-        var queue = 'updateStock';
+    var queue = 'symbol';
 
-        channel.assertQueue(queue, {
-            durable: true
-        });
-
-        console.log(" [*] Waiting for stockData messages in %s. To exit press CTRL+C", queue);
-
-        channel.consume(queue, function (data) {
-            stock = JSON.parse(data.content.toString())
-            console.log(" [x] Received Stock:", stock.name + " : " + stock.value);
-            //Socket Trigger All Clients
-            wss.emit("updatedStock", ws, stock);
-        });
+    channel.assertQueue(queue, {
+      durable: true
     });
+
+    channel.consume(queue, function (data) {
+      JSON.parse(data.content.toString());
+      console.log('data', data);
+      //Socket Trigger All Clients
+      socket.emit('symbol', ws);
+    });
+  });
 });
 
-financialInfo.connect(`ws://localhost:${port}`, function (error0, connection) {
-    if (error0) {
-        throw error0;
+const financial = financialInfo.connect(ws, function (error0, connection) {
+  if (error0) {
+    throw error0;
+  }
+  connection.createChannel(function (error1, channel) {
+    if (error1) {
+      throw error1;
     }
-    connection.createChannel(function (error1, channel) {
-        if (error1) {
-            throw error1;
-        }
-        var queue = 'updateStock';
+    var queue = 'symbol';
 
-        channel.assertQueue(queue, {
-            durable: true
-        });
-
-        console.log(" [*] Waiting for stockData messages in %s. To exit press CTRL+C", queue);
-
-        channel.consume(queue, function (data) {
-            stock = JSON.parse(data.content.toString())
-            console.log(" [x] Received Stock:", stock.name + " : " + stock.value);
-            //Socket Trigger All Clients
-            wss.emit("updatedStock", ws, stock);
-        });
+    channel.assertQueue(queue, {
+      durable: true
     });
+
+    channel.consume(queue, function (data) {
+      JSON.parse(data.content.toString());
+      console.log('data', data);
+      //Socket Trigger All Clients
+      socket.emit('symbol', ws);
+    });
+  });
 });
+module.exports = {
+  company,
+  financial
+};

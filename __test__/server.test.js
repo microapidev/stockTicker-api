@@ -1,5 +1,7 @@
 import app from '../src/app';
 const request = require('supertest');
+const WebSocket = require('ws');
+import { port } from '../src/config/util';
 
 describe('Dummy Test', () => {
   test('should respond with status code 200', async () => {
@@ -23,13 +25,13 @@ describe('Company Info', () => {
 });
 describe('app', () => {
   it('connect websockets response', (done) => {
-      expect.assertions(1);
+    expect.assertions(1);
 
-      const ws = new WebSocket(`ws://localhost:3000`)
-          .on('message', (msg) => {
-              expect(JSON.parse(msg).id).toEqual(0);
-              ws.close();
-          })
-          .on('close', () => done());
+    const ws = new WebSocket(`ws://localhost:${port}`)
+      .on('message', (msg) => {
+        expect(JSON.parse(msg).id).toEqual(0);
+        ws.close();
+      })
+      .on('close', () => done());
   });
 });
