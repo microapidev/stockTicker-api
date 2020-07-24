@@ -18,5 +18,5 @@ RUN npm install
 COPY . .
 COPY env.example .env
 
-EXPOSE 8888 5000
-CMD [ "node", "src/index.js" ]
+EXPOSE 8888 3000
+CMD [ "node", "src/bin/www.js" ]

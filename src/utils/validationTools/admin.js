@@ -17,9 +17,7 @@ export const addSingleAdmin = {
         tlds: { allow: true }
       })
       .trim()
-      .required(),
-    password: Joi.string().min(8).max(20).required(),
-    role: Joi.string()
+      .required()
   })
 };
 
@@ -33,21 +31,7 @@ export const getSingleAdmin = {
   })
 };
 
-export const deleteSingleAdmin = {
-  headers: Joi.object({
-    authorization: Joi.string().required()
-  }),
-
-  params: Joi.object().keys({
-    adminId: Joi.custom(mongoIdSchema.isValidObjectId, 'mongo ObjectId').required()
-  })
-};
-
 export const getApiKey = {
-  headers: Joi.object({
-    authorization: Joi.string().required()
-  }),
-
   params: Joi.object().keys({
     adminId: Joi.custom(mongoIdSchema.isValidObjectId, 'mongo ObjectId').required()
   })

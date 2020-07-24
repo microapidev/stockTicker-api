@@ -15,7 +15,7 @@ const generateToken = (payload, secret, duration = '30d') => {
 };
 
 // adminToken generator
-const getAdminToken = async (adminId) => {
+const getAdminToken = (adminId) => {
   if (!mongoIdSchema.isValidObjectId(adminId)) {
     throw new CustomError(400, 'Invalid admin ID');
   }
