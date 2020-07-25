@@ -4,6 +4,10 @@ node_js:
 services:
 - 
 before_script:
-- npm run lint
+- npm run lint:fix
+- npm test
 script:
 - npm run test:ci
+after_success:
+- cd ..
+- npm run coveralls

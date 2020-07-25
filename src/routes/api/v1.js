@@ -1,9 +1,11 @@
-const express = require('express');
+const router = require('express').Router();
+
 const adminRoutes = require('../../controllers/admin');
 const companyRoutes = require('../../controllers/company');
+const docRoutes = require('../../controllers/documentation');
 
-const router = express.Router();
 
+router.use(['/', 'doc', 'docs', 'documentation'], docRoutes);
 router.use('/admin', adminRoutes);
 router.use('/company', companyRoutes);
 
