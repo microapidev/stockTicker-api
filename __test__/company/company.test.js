@@ -21,3 +21,10 @@ describe('Company Stock Quote', () => {
     expect(res.status).toBe(200);
   }, 10000);
 });
+describe('connect websockets response', () => {
+  test('should respond with status code 200', async () => {
+    const res = await request(app).get('/api/v1');
+    expect(res.status).toBe(200);
+  }, 10000);
+});
+

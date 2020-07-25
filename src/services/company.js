@@ -2,6 +2,7 @@ import https from 'https';
 import CustomResponse from '../utils/customResponse';
 import CustomError from '../utils/customError';
 
+//const socket = new WebSocket('wss://ws.finnhub.io');
 export const company = {
   getProfile: (request, response, next) => {
     try {
