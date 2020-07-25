@@ -11,7 +11,7 @@ export const errorHandler = (error, request, response) => {
     response.status(error.status).json({
       status: 'error',
       error: error.message,
-      data: [] // no data to return
+      data: ['inside life'] // no data to return
     });
     // if this is an unknown/uncaught error
   } else {
