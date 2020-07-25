@@ -1,8 +1,11 @@
-import * as companyProfile from '../services/companyInfo';
-import * as metrics from '../services/financialInfo';
+import { company } from '../services/company';
 import express from 'express';
 const router = express.Router();
-router.get('/companyProfile', companyProfile.getProfile);
 
-router.get('/metric', metrics.getMetric);
-module.exports = router;
+router.get('/:symbol/profile', company.getProfile);
+
+router.get('/:symbol/metric', company.getFinancialMetric);
+
+router.get('/:symbol/stock', company.getStockQuote);
+
+export default router;
