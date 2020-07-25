@@ -1,8 +1,8 @@
-import https from 'https';
-import CustomResponse from '../utils/customResponse';
-import CustomError from '../utils/customError';
+const https = require('https');
+const CustomResponse = require('../utils/customResponse');
+const CustomError = require('../utils/customError');
 
-export const company = {
+const company = {
   getProfile: (request, response, next) => {
     try {
       const symbol = request.params.symbol;
@@ -70,3 +70,5 @@ export const company = {
     }
   }
 };
+
+module.exports = { company };

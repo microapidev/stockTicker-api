@@ -1,8 +1,8 @@
-import CustomError from '../utils/customError';
+const CustomError = require('../utils/customError');
 
 const schemaKeys = ['headers', 'params', 'query', 'body'];
 
-export const validateSchema = (requestSchema) => {
+const validateSchema = (requestSchema) => {
   return (request, response, next) => {
     const validations = schemaKeys.map((key) => {
       const schema = requestSchema[key];
@@ -44,3 +44,5 @@ export const validateSchema = (requestSchema) => {
       });
   };
 };
+
+module.exports = { validateSchema };

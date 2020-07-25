@@ -1,6 +1,6 @@
-import { company } from '../services/company';
-import { genericLevelAPIAuthorization } from '../middlewares/auth';
-import express from 'express';
+const { company } = require('../services/company');
+const { genericLevelAPIAuthorization } = require('../middlewares/auth');
+const express = require('express');
 const router = express.Router();
 
 router.use(genericLevelAPIAuthorization);
@@ -11,4 +11,4 @@ router.get('/:symbol/metric', company.getFinancialMetric);
 
 router.get('/:symbol/stock', company.getStockQuote);
 
-export default router;
+module.exports = router;

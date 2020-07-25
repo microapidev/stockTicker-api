@@ -1,7 +1,7 @@
-import app from '../app';
-import http from 'http';
-import debug from 'debug';
-import { connect } from '../config/mongodb';
+const app = require('../app');
+const http = require('http');
+const debug = require('debug');
+const { connect } = require('../config/mongodb');
 
 const log = debug('log');
 

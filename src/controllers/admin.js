@@ -1,8 +1,8 @@
 require('express-async-errors');
-import express from 'express';
-import { admin as AdminService } from '../services/admin';
-import { addSingleAdmin, getSingleAdmin, getApiKey } from '../utils/validationTools/admin';
-import { validateSchema } from '../middlewares/validation';
+const express = require('express');
+const { admin: AdminService } = require('../services/admin');
+const { addSingleAdmin, getSingleAdmin, getApiKey } = require('../utils/validationTools/admin');
+const { validateSchema } = require('../middlewares/validation');
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.get('/:adminId', validateSchema(getSingleAdmin), AdminService.getSingleAd
 
 router.get('/:adminId/key', validateSchema(getApiKey), AdminService.getApiKey);
 
-export default router;
+module.exports = router;
