@@ -22,7 +22,8 @@ const company = companyInfo.connect(ws, function (error0, connection) {
       JSON.parse(data.content.toString());
       console.log('data', data);
       //Socket Trigger All Clients
-      www.socket.emit('symbol');
+      socket.emit('symbol');
     });
   });
 });
+module.exports = { company };

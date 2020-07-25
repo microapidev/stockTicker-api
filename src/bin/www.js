@@ -2,9 +2,10 @@ const app = require('../app');
 const http = require('http');
 const debug = require('debug');
 const { connect } = require('../config/mongodb');
+const WebSocket = require('ws');
 
 const log = debug('log');
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ noServer: true });
 export const socket = {
   socket: wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(data) {

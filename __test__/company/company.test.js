@@ -36,4 +36,3 @@ describe('Company Stock Quote', () => {
     expect(res.status).toBe(200);
   }, 10000);
 });
-
