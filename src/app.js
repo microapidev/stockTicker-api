@@ -6,7 +6,8 @@ const { errorHandler } = require('./middlewares/errorHandler');
 const CustomError = require('./utils/customError');
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api/index');
-
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./swagger/openApiDocumentation');
 const app = express();
 
 app.use(logger('dev'));
@@ -15,7 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use('/api', apiRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
+app.use('/api/v1', apiRouter);
 
 // catch 404, non-existent route
 app.use('*', (request, response, next) => {
