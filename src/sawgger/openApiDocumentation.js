@@ -1,3 +1,5 @@
+const { string } = require("@hapi/joi");
+
 const openApiDocumentation = {
   swagger: '3.0',
   openapi: '3.0.1',
@@ -19,46 +21,256 @@ const openApiDocumentation = {
       name: 'CRUD Operations Routes'
     }
   ],
+  security: {
+    bearerAuth: {},
+  },
   paths: {
-    '/v1': {
-      post: {
-        tags: ['v1'],
-        description: 'V1',
-        operationId: 'apikey',
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                $ref: '#/components/schemas/v1'
-              }
-            }
+    '/': {
+        post: {
+          tags: ['Register Admin'],
+          description: 'Registers admin',
+          operationId: 'register',
+          security: [ {bearerAuth: {}}],
+          requestBody: {
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/v1',
+                },
+              },
+            },
+            required: true,
           },
-          required: true
+          parameters: [],
+          responses: {
+            '200': {
+              description: 'Success',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+            '400': {
+              description: 'Bad Request',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+          },
         },
-        responses: {
-          '200': {
-            description: 'Success',
+      },
+      '/:adminId': {
+        get: {
+          tags: ['Admin'],
+          description: 'Registered admin',
+          operationId: 'registered',
+          security: [ {bearerAuth: {}}],
+          requestBody: {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Response'
-                }
-              }
-            }
+                  type:String,
+                },
+              },
+            },
+            required: true,
           },
-          '400': {
-            description: 'Bad Request',
+          parameters: [],
+          responses: {
+            '200': {
+              description: 'Success',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+            '400': {
+              description: 'Bad Request',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      '/:adminId/key': {
+        get: {
+          tags: ['Api key'],
+          description: 'admin key',
+          operationId: 'api key',
+          security: [ {bearerAuth: {}}],
+          requestBody: {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Response'
-                }
-              }
-            }
-          }
-        }
-      }
-    },
+                    type:String,
+                },
+              },
+            },
+            required: true,
+          },
+          parameters: [],
+          responses: {
+            '200': {
+              description: 'Success',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+            '400': {
+              description: 'Bad Request',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      '/:symbol/profile': {
+        get: {
+          tags: ['Profile'],
+          description: 'company profile',
+          operationId: 'register',
+          security: [ {bearerAuth: {}}],
+          requestBody: {
+            content: {
+              'application/json': {
+                schema: {
+                 type:String,
+                },
+              },
+            },
+            required: true,
+          },
+          parameters: [],
+          responses: {
+            '200': {
+              description: 'Success',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+            '400': {
+              description: 'Bad Request',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      '/:symbol/metric': {
+        get: {
+          tags: ['metric'],
+          description: 'metric',
+          operationId: 'metric',
+          security: [ {bearerAuth: {}}],
+          requestBody: {
+            content: {
+              'application/json': {
+                schema: {
+                 type:String,
+                },
+              },
+            },
+            required: true,
+          },
+          parameters: [],
+          responses: {
+            '200': {
+              description: 'Success',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref:'#/components/schemas/Response'
+                  },
+                },
+              },
+            },
+            '400': {
+              description: 'Bad Request',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      '/:symbol/stock': {
+        get: {
+          tags: ['stock'],
+          description: 'stock',
+          operationId: 'stock',
+          security: [ {bearerAuth: {}}],
+          requestBody: {
+            content: {
+              'application/json': {
+                schema: {
+                 type:String,
+                },
+              },
+            },
+            required: true,
+          },
+          parameters: [],
+          responses: {
+            '200': {
+              description: 'Success',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref:'#/components/schemas/Response'
+                  },
+                },
+              },
+            },
+            '400': {
+              description: 'Bad Request',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/Response',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     components: {
       schemas: {
         Response: {
