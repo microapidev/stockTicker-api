@@ -25,7 +25,7 @@ const openApiDocumentation = {
     bearerAuth: {},
   },
   paths: {
-    '/': {
+    'api/v1': {
         post: {
           tags: ['Register Admin'],
           description: 'Registers admin',
@@ -66,7 +66,7 @@ const openApiDocumentation = {
           },
         },
       },
-      '/:adminId': {
+      'api/vi/:adminId': {
         get: {
           tags: ['Admin'],
           description: 'Registered admin',
@@ -107,7 +107,7 @@ const openApiDocumentation = {
           },
         },
       },
-      '/:adminId/key': {
+      'api/v1/:adminId/key': {
         get: {
           tags: ['Api key'],
           description: 'admin key',
@@ -148,7 +148,7 @@ const openApiDocumentation = {
           },
         },
       },
-      '/:symbol/profile': {
+      'api/v1/:symbol/profile': {
         get: {
           tags: ['Profile'],
           description: 'company profile',
@@ -189,7 +189,7 @@ const openApiDocumentation = {
           },
         },
       },
-      '/:symbol/metric': {
+      'api/v1/:symbol/metric': {
         get: {
           tags: ['metric'],
           description: 'metric',
@@ -230,7 +230,7 @@ const openApiDocumentation = {
           },
         },
       },
-      '/:symbol/stock': {
+      'api/v1/:symbol/stock': {
         get: {
           tags: ['stock'],
           description: 'stock',

@@ -6,7 +6,8 @@ const { errorHandler } = require('./middlewares/errorHandler');
 const CustomError = require('./utils/customError');
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api/index');
-
+const swaggerUi = require("swagger-ui-express");
+const openApiDocumentation = require("./sawgger/openApiDocumentation");
 const app = express();
 
 app.use(logger('dev'));
