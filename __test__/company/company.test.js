@@ -27,4 +27,3 @@ describe('connect websockets response', () => {
     expect(res.status).toBe(200);
   }, 10000);
 });
-
