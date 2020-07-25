@@ -1,9 +1,9 @@
-import { Admin } from '../models/admin';
-import CustomError from '../utils/customError';
-import CustomResponse from '../utils/customResponse';
-import { getAdminToken } from '../utils/tokenGenerator';
+const { Admin } = require('../models/admin');
+const CustomError = require('../utils/customError');
+const CustomResponse = require('../utils/customResponse');
+const { getAdminToken } = require('../utils/tokenGenerator');
 
-export const admin = {
+const admin = {
   addSingleAdmin: async (request, response, next) => {
     //get arguments
     const { email } = request.body;
@@ -26,9 +26,13 @@ export const admin = {
       admin = await admin.save();
       admin = admin.toJSON();
 
+      // generate api key
+      const token = getAdminToken(admin.id);
+
       const data = {
         email: admin.email,
-        id: admin.id
+        id: admin.id,
+        apiKey: token
       };
 
       return CustomResponse(response, 201, data, 'Account created successfully');
@@ -75,3 +79,5 @@ export const admin = {
     }
   }
 };
+
+module.exports = { admin };

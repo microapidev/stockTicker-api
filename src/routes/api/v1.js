@@ -1,10 +1,10 @@
-import express from 'express';
-import adminRoutes from '../../controllers/admin';
-import companyRoutes from '../../controllers/company';
+const express = require('express');
+const adminRoutes = require('../../controllers/admin');
+const companyRoutes = require('../../controllers/company');
 
 const router = express.Router();
 
 router.use('/admin', adminRoutes);
 router.use('/company', companyRoutes);
 
-export default router;
+module.exports = router;
