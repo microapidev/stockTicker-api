@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use(apiRouter);
+app.use('/api', apiRouter);
 
 // catch 404, non-existent route
 app.use('*', (request, response, next) => {

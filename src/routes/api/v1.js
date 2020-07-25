@@ -1,10 +1,10 @@
 import express from 'express';
-import adminRouteController from '../../controllers/admin';
-import companyInfo from '../../controllers/company';
+import adminRoutes from '../../controllers/admin';
+import companyRoutes from '../../controllers/company';
 
 const router = express.Router();
 
-router.use('/admin', adminRouteController);
-router.use('/', companyInfo);
+router.use('/admin', adminRoutes);
+router.use('/company', companyRoutes);
 
 export default router;
