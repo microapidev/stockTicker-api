@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 let router = express.Router();
 
 /* GET home page. */
@@ -7,4 +7,4 @@ router.get('/', (req, res, next) => {
   res.status(200).send('Connected to server');
 });
 
-export default router;
+module.exports = router;

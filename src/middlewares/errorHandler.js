@@ -1,4 +1,4 @@
-export const errorHandler = (error, request, response) => {
+const errorHandler = (error, request, response) => {
   if (error.statusCode) {
     // if error has user-defined statusCode then it's a custom error
     response.status(error.statusCode).json({
@@ -11,7 +11,7 @@ export const errorHandler = (error, request, response) => {
     response.status(error.status).json({
       status: 'error',
       error: error.message,
-      data: [] // no data to return
+      data: ['inside life'] // no data to return
     });
     // if this is an unknown/uncaught error
   } else {
@@ -29,3 +29,5 @@ export const errorHandler = (error, request, response) => {
     console.log(error.message);
   }
 };
+
+module.exports = errorHandler;

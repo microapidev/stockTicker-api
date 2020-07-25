@@ -1,13 +1,11 @@
 require('express-async-errors');
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import { errorHandler } from './middlewares/errorHandler';
-import CustomError from './utils/customError';
-import indexRouter from './routes/index';
-import apiRouter from './routes/api/index';
-const swaggerUi = require('swagger-ui-express');
-const openApiDocumentation = require('./sawgger/openApiDocumentation');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const { errorHandler } = require('./middlewares/errorHandler');
+const CustomError = require('./utils/customError');
+const indexRouter = require('./routes/index');
+const apiRouter = require('./routes/api/index');
 
 const app = express();
 
@@ -32,4 +30,4 @@ app.use((error, request, response, next) => {
   errorHandler(error, request, response);
 });
 
-export default app;
+module.exports = app;

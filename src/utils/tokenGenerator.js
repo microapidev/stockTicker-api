@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { ADMIN_SECRET } from '../config/util';
+const jwt = require('jsonwebtoken');
+const { ADMIN_SECRET } = require('../config/util');
 
 // token generator
 const generateToken = (payload, secret, duration = '30d') => {
@@ -22,4 +22,4 @@ const getAdminToken = (adminId) => {
   );
 };
 
-export { getAdminToken };
+module.exports = { getAdminToken };
