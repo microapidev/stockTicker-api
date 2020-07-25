@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import debug from 'debug';
-import { DB_URI as connectionUri } from './util';
+const mongoose = require('mongoose');
+const debug = require('debug');
+const { DB_URI: connectionUri } = require('./util');
 
 const log = debug('log');
 
@@ -41,4 +41,4 @@ const disconnect = async () => {
   }
 };
 
-export { connect, format, disconnect };
+module.exports = { connect, format, disconnect };

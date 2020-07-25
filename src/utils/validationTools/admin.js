@@ -1,11 +1,11 @@
-import Joi from '@hapi/joi';
-import { mongoIdSchema } from './mongoIdSchema';
+const Joi = require('@hapi/joi');
+const { mongoIdSchema } = require('./mongoIdSchema');
 
 /**
  * Schema validation for '/admin routes'
  */
 
-export const addSingleAdmin = {
+const addSingleAdmin = {
   body: Joi.object().keys({
     email: Joi.string()
       .email({
@@ -17,14 +17,16 @@ export const addSingleAdmin = {
   })
 };
 
-export const getSingleAdmin = {
+const getSingleAdmin = {
   params: Joi.object().keys({
     adminId: Joi.custom(mongoIdSchema.isValidObjectId, 'mongo ObjectId').required()
   })
 };
 
-export const getApiKey = {
+const getApiKey = {
   params: Joi.object().keys({
     adminId: Joi.custom(mongoIdSchema.isValidObjectId, 'mongo ObjectId').required()
   })
 };
+
+module.exports = { addSingleAdmin, getSingleAdmin, getApiKey };

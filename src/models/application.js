@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import mongooseDelete from 'mongoose-delete';
+const mongoose = require('mongoose');
+const mongooseDelete = require('mongoose-delete');
 
 const Schema = mongoose.Schema;
 
@@ -35,4 +35,4 @@ ApplicationSchema.plugin(mongooseDelete, {
 });
 
 const Application = mongoose.model('Applications', ApplicationSchema);
-export { Application };
+module.exports = { Application };

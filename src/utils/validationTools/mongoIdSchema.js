@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const {
   Types: { ObjectId }
 } = mongoose;
 
-export const mongoIdSchema = {
+const mongoIdSchema = {
   //Helper to check if an ID is an object ID
   isObjectId: (id, helper) => {
     if (id instanceof ObjectId) return true;
@@ -20,3 +20,5 @@ export const mongoIdSchema = {
     return helper.message('Id is not valid');
   }
 };
+
+module.exports = { mongoIdSchema };

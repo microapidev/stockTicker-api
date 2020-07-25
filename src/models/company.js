@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -23,4 +23,4 @@ CompanySchema.index(
 );
 
 const Company = mongoose.model('Company', CompanySchema);
-export { Company };
+module.exports = { Company };

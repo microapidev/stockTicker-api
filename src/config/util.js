@@ -9,4 +9,4 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev') {
   DB_URI = process.env.DB_URI;
 }
 
-export { ADMIN_SECRET, DB_URI, HOST, PORT };
+module.exports = { ADMIN_SECRET, DB_URI, HOST, PORT };
