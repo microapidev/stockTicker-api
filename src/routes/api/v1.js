@@ -1,11 +1,11 @@
 const router = require('express').Router();
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('../../swagger/openApiDocumentation');
 
 const adminRoutes = require('../../controllers/admin');
 const companyRoutes = require('../../controllers/company');
-const docRoutes = require('../../controllers/documentation');
 
-
-router.use(['/', 'doc', 'docs', 'documentation'], docRoutes);
+router.use(['/', 'doc', 'docs', 'documentation'], swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 router.use('/admin', adminRoutes);
 router.use('/company', companyRoutes);
 

@@ -1,7 +1,5 @@
-const express = require('express');
+const router = require('express').Router();
 const api = require('./v1');
-
-const router = express.Router();
 
 router.use('/v1', api);
 
