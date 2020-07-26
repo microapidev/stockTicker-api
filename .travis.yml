@@ -8,6 +8,6 @@ before_script:
 - npm test
 script:
 - npm run test:ci
-after_success:
-- cd ..
-- npm run coveralls
+# after_success:
+# - cd ..
+# - npm run coveralls
