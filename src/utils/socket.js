@@ -1,4 +1,4 @@
-const socket = require('../bin/www');
+const { socket } = require('../bin/www');
 const companyInfo = require('../services/companyInfo');
 const WebSocket = require('ws');
 
