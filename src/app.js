@@ -2,12 +2,16 @@ require('express-async-errors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const { connect } = require('./config/mongodb');
 const { errorHandler } = require('./middlewares/errorHandler');
 const CustomError = require('./utils/customError');
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api/index');
-const swaggerUi = require('swagger-ui-express');
-const openApiDocumentation = require('./swagger/openApiDocumentation');
+
+/** Connect to database
+*/
+connect();
+
 const app = express();
 
 app.use(logger('dev'));
@@ -16,8 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
-app.use('/api/v1', apiRouter);
+app.use('/api', apiRouter);
 
 // catch 404, non-existent route
 app.use('*', (request, response, next) => {
