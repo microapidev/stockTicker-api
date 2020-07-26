@@ -1,6 +1,7 @@
 const app = require('../app');
 const http = require('http');
 const debug = require('debug');
+const { connect } = require('../config/mongodb');
 const WebSocket = require('ws');
 
 const log = debug('log');
@@ -18,6 +19,11 @@ export const socket = {
     });
   })
 };
+
+/**
+ * Connect to database
+ */
+connect();
 
 /**
  * Normalize a port into a number, string, or false.
