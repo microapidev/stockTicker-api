@@ -169,6 +169,7 @@ const openApiDocumentation = {
             'application/json': {
               schema: {
                 type: "Object",
+                $ref:'#/components/schemas/profile',
                 properties:{
                   type: "string"
                 }
@@ -217,6 +218,7 @@ const openApiDocumentation = {
             'application/json': {
               schema: {
                 type: "Object",
+                $ref:'#/components/schemas/metric',
                 properties:{
                   metric: "string"
                 }
@@ -265,6 +267,7 @@ const openApiDocumentation = {
             'application/json': {
               schema: {
                 type: "object",
+                $ref:'#/components/schemas/quote',
                 properties: {
                   stock: {
                     type: "string",
@@ -317,7 +320,35 @@ const openApiDocumentation = {
           type: 'object',
           properties: {
             email: {
-              type: 'string'
+              type: 'string',
+              description:'Email Address'
+            }
+          }
+        },
+        profile: {
+          type: 'object',
+          properties: {
+            symbol: {
+              type: 'string',
+              description:'Company Symbol on stock exchange E.g(Google symbol is GOOGL)' 
+            }
+          }
+        },
+        metric: {
+          type: 'object',
+          properties: {
+            symbol: {
+              type: 'string',
+              description:'Company Symbol on stock exchange E.g(Google symbol is GOOGL)' 
+            }
+          }
+        },
+        quote: {
+          type: 'object',
+          properties: {
+            symbol: {
+              type: 'string',
+              description:'Company Symbol on stock exchange E.g(Google symbol is GOOGL)' 
             }
           }
         }
