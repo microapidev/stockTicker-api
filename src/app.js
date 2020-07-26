@@ -2,7 +2,7 @@ require('express-async-errors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const { connect, disconnect } = require('./config/mongodb');
+const { connect } = require('./config/mongodb');
 const { errorHandler } = require('./middlewares/errorHandler');
 const CustomError = require('./utils/customError');
 const indexRouter = require('./routes/index');
@@ -10,7 +10,7 @@ const apiRouter = require('./routes/api/index');
 
 /** Connect to database
 */
-// connect();
+connect();
 
 const app = express();
 
