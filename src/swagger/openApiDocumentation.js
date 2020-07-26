@@ -1,39 +1,42 @@
 const openApiDocumentation = {
   swagger: '3.0',
-  openapi: '3.0.0',
+  openapi: '3.0.1',
   info: {
-    title: ' Dockerized Stock Micro Service',
-    description: 'A Dockerized Microservice for Stock Ticker',
+    title: 'A Dockerized Stock-Ticker Micro-Service',
+    description: 'A Dockerized Microservice for accessing information of companies listed on major stock exchanges e.g NYSE, NASDAQ.\nGet company profile, financial metrics, and stock quotes to make better stock investment decisions.',
     contact: {
-      name: 'Stock Ticker API'
+      name: 'HNGi'
     }
   },
   server: [
     {
-      url: 'http:localhost:5000',
+      url: 'http:localhost:3000',
       description: 'Local Server'
+    },
+    {
+      url: 'stock-ticker-microapi.herokuapp.com',
+      description: 'Staging Server'
     }
   ],
-  tags: [
-    {
-      name: 'CRUD Operations Routes'
-    }
+  schemes: [
+    'HTTP',
+    'HTTPS'
   ],
   security: {
     bearerAuth: {}
   },
   paths: {
-    'api/v1': {
+    '/api/v1/admin': {
       post: {
-        tags: ['Register Admin'],
-        description: 'Registers admin',
+        tags: ['Register admin'],
+        description: 'Register as an admin, to get authorization to use this service',
         operationId: 'register',
         security: [],
         requestBody: {
           content: {
             'application/json': {
               schema: {
-                $ref: '#/components/schemas/v1'
+                $ref: '#/components/schemas/Admin'
               }
             }
           },
@@ -41,7 +44,7 @@ const openApiDocumentation = {
         },
         parameters: [],
         responses: {
-          '200': {
+          '201': {
             description: 'Success',
             content: {
               'application/json': {
@@ -64,27 +67,23 @@ const openApiDocumentation = {
         }
       }
     },
-    'api/v1/:adminId': {
+    '/api/v1/admin/{adminId}': {
       get: {
-        tags: ['Admin'],
-        description: 'Registered admin',
+        tags: ['Get admin'],
+        description: 'Get a registered admin\'s details',
         operationId: 'registered',
         security: [],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                type: "Object",
-                properties:{
-                  type: "string"
-                }
-
-              }
-            }
-          },
-          required: true
-        },
-        parameters: [],
+        requestBody: {},
+        parameters: [
+          {
+            name: 'adminId',
+            in: 'path',
+            schema: {
+              type: 'string',
+            },
+            required: true,
+          }
+        ],
         responses: {
           '200': {
             description: 'Success',
@@ -109,27 +108,23 @@ const openApiDocumentation = {
         }
       }
     },
-    'api/v1/:adminId/key': {
+    '/api/v1/admin/{adminId}/key': {
       get: {
-        tags: ['Api key'],
-        description: 'admin key',
+        tags: ['Get access key'],
+        description: 'Get admin api access key. You can use this generic adminID to get an api authorization key: 5f1b931220a97e24c8dca476. Then pass the apiKey to authorization as bearer to access secured enpoints',
         operationId: 'api key',
-        security: [
+        security: [],
+        requestBody: {},
+        parameters: [
           {
-            bearerAuth: {}
+            name: 'adminId',
+            in: 'path',
+            schema: {
+              type: 'string',
+            },
+            required: true,
           }
         ],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                type: "string"
-              }
-            }
-          },
-          required: true
-        },
-        parameters: [],
         responses: {
           '200': {
             description: 'Success',
@@ -154,31 +149,27 @@ const openApiDocumentation = {
         }
       }
     },
-    'api/v1/:symbol/profile': {
+    '/api/v1/company/{symbol}/profile': {
       get: {
-        tags: ['Profile'],
-        description: 'company profile',
-        operationId: 'register',
+        tags: ['Company profile'],
+        description: 'Get a single company\'s profile. Pass in a stock ticker in URL path as symbol, e.g AAPL, TSLA, MSFT, GOOGL. You can pass in this generic adminID to path parameters: 5f1b931220a97e24c8dca476',
+        operationId: 'companyprofile',
         security: [
           {
             bearerAuth: {}
           }
         ],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                type: "Object",
-                $ref:'#/components/schemas/profile',
-                properties:{
-                  type: "string"
-                }
-              }
-            }
-          },
-          required: true
-        },
-        parameters: [],
+        requestBody: {},
+        parameters: [
+          {
+            name: 'symbol',
+            in: 'path',
+            schema: {
+              type: 'string',
+            },
+            required: true,
+          }
+        ],
         responses: {
           '200': {
             description: 'Success',
@@ -199,35 +190,41 @@ const openApiDocumentation = {
                 }
               }
             }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Response'
+                }
+              }
+            }
           }
         }
       }
     },
-    'api/v1/:symbol/metric': {
+    '/api/v1/company/{symbol}/metric': {
       get: {
-        tags: ['metric'],
-        description: 'metric',
+        tags: ['Company metric'],
+        description: 'Get a single company\'s financial metrics. Pass in a stock ticker in URL path as symbol, e.g AAPL, TSLA, MSFT, GOOGL. You can pass in this generic adminID to path parameters: 5f1b931220a97e24c8dca476',
         operationId: 'metric',
         security: [
           {
             bearerAuth: {}
           }
         ],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                type: "Object",
-                $ref:'#/components/schemas/metric',
-                properties:{
-                  metric: "string"
-                }
-              }
-            }
-          },
-          required: true
-        },
-        parameters: [],
+        requestBody: {},
+        parameters: [
+          {
+            name: 'symbol',
+            in: 'path',
+            schema: {
+              type: 'string',
+            },
+            required: true,
+          }
+        ],
         responses: {
           '200': {
             description: 'Success',
@@ -248,37 +245,41 @@ const openApiDocumentation = {
                 }
               }
             }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Response'
+                }
+              }
+            }
           }
         }
       }
     },
-    'api/v1/:symbol/stock': {
+    '/api/v1/company/{symbol}/stock': {
       get: {
-        tags: ['stock'],
-        description: 'stock',
+        tags: ['Company stock quote'],
+        description: 'Get a single company\'s stock quote. Pass in a stock ticker in URL path as symbol, e.g AAPL, TSLA, MSFT, GOOGL. You can pass in this generic adminID to path parameters: 5f1b931220a97e24c8dca476',
         operationId: 'stock',
         security: [
           {
             bearerAuth: {}
           }
         ],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                type: "object",
-                $ref:'#/components/schemas/quote',
-                properties: {
-                  stock: {
-                    type: "string",
-                  },
-                },
-              },
+        requestBody: {},
+        parameters: [
+          {
+            name: 'symbol',
+            in: 'path',
+            schema: {
+              type: 'string',
             },
-          },
-          required: true
-        },
-        parameters: [],
+            required: true,
+          }
+        ],
         responses: {
           '200': {
             description: 'Success',
@@ -299,61 +300,62 @@ const openApiDocumentation = {
                 }
               }
             }
-          }
-        }
-      }
-    },
-    components: {
-      schemas: {
-        Response: {
-          type: 'object',
-          properties: {
-            status: {
-              type: 'boolean'
-            },
-            message: {
-              type: 'string'
-            }
-          }
-        },
-        v1: {
-          type: 'object',
-          properties: {
-            email: {
-              type: 'string',
-              description:'Email Address'
-            }
-          }
-        },
-        profile: {
-          type: 'object',
-          properties: {
-            symbol: {
-              type: 'string',
-              description:'Company Symbol on stock exchange E.g(Google symbol is GOOGL)' 
-            }
-          }
-        },
-        metric: {
-          type: 'object',
-          properties: {
-            symbol: {
-              type: 'string',
-              description:'Company Symbol on stock exchange E.g(Google symbol is GOOGL)' 
-            }
-          }
-        },
-        quote: {
-          type: 'object',
-          properties: {
-            symbol: {
-              type: 'string',
-              description:'Company Symbol on stock exchange E.g(Google symbol is GOOGL)' 
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Response'
+                }
+              }
             }
           }
         }
       }
     }
+  },
+
+  components: {
+    schemas: {
+      Response: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'boolean'
+          },
+          message: {
+            type: 'string'
+          },
+          data: {
+            type: 'object'
+          }
+        }
+      },
+      Admin: {
+        type: 'object',
+        properties: {
+          email: {
+            type: 'string',
+            description:'Email Address'
+          }
+        }
+      },
+    },
+    responses: {
+      UnauthorizedError: {
+        description: 'Access token is missing or invalid'
+      }
+    },
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        in: 'header',
+      },
+    },
   }
 };
 module.exports = openApiDocumentation;
