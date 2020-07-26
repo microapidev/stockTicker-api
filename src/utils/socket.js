@@ -26,4 +26,5 @@ const company = companyInfo.connect(ws, function (error0, connection) {
     });
   });
 });
+
 module.exports = { company };

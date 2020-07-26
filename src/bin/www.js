@@ -3,18 +3,14 @@ const http = require('http');
 const debug = require('debug');
 const { connect } = require('../config/mongodb');
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ noServer: true });
 
 const log = debug('log');
-
-/**
- * Connect to database
- */
-connect();
+const wss = new WebSocket.Server({ noServer: true });
 
 /* Setup web socket
 */
-exports.socket = {
+
+const socket = {
   socket: wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(data) {
       wss.clients.forEach(function each(client) {
@@ -27,6 +23,11 @@ exports.socket = {
     });
   })
 };
+
+/**
+ * Connect to database
+ */
+connect();
 
 /**
  * Normalize a port into a number, string, or false.
@@ -96,3 +97,5 @@ const onListening = () => {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+module.exports = { socket };
