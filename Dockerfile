@@ -16,7 +16,7 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-COPY env.example .env
+COPY .env.example .env
 
-EXPOSE 8888 3000
+EXPOSE 3000
 CMD [ "node", "src/bin/www.js" ]
