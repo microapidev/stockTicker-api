@@ -1,0 +1,21 @@
+version: "3"
+services:
+  app:
+    container_name: stockticker
+    restart: unless_stopped
+    build: .
+    env_file: .env
+    environment:
+      - DB_URI=${DB_URI}
+      - ADMIN_SECRET=${ADMIN_SECRET}
+      - PORT=${PORT}
+      - FINNHUB_APIKEY=${FINNHUB_APIKEY}
+    ports:
+      - "8886:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27018:27017"
